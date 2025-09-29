@@ -145,15 +145,63 @@ def prueba_4(carpeta):
     cart_link.click()
     capturar(driver, carpeta, "4_view_cart")
     #hacer click en +
-    #hacer click en -
-# ==== MAPA DE PRUEBAS ====
+    #hacer click en -}
+    # ==== MAPA DE PRUEBAS ====
+def prueba_5(carpeta):
+    """Agregar item al carrito usando data-cy con confirmación"""
+    driver.get(URL)
+    capturar(driver, carpeta, "1_inicio")
+
+    # Click en el Espresso
+    cafe = driver.find_element(By.CSS_SELECTOR, "[data-cy='Espresso']")
+    cafe.click()
+    capturar(driver, carpeta, "2.1_click_espresso")
+    # Click en la Mocha
+    cafe = driver.find_element(By.CSS_SELECTOR, "[data-cy='Mocha']")
+    cafe.click()
+    capturar(driver, carpeta, "2.2_click_Mocha")
+    # Click en la Espresso-Con Panna
+    cafe = driver.find_element(By.CSS_SELECTOR, "[data-cy='Espresso-Con Panna']")
+    cafe.click()
+    capturar(driver, carpeta, "2.3_click_Espresso-Con Panna")
+    time.sleep(2)
+    #Seleccionar si se quiere la oferta
+    root = tk.Tk()
+    root.withdraw()
+    respuesta = messagebox.askyesno("Confirmación", "¿Quieres hacer click en 'Yes, of course!'?")
+    root.destroy()
+
+    if respuesta:
+        try:
+            yes_btn = wait.until(
+                EC.element_to_be_clickable((By.CLASS_NAME, "yes"))
+            )
+            yes_btn.click()
+            capturar(driver, carpeta, "3_yes_click")
+            print("[✔] Se hizo click en 'Yes, of course!'")
+        except Exception as e:
+            print(f"[ERROR] No encontré el botón Yes: {e}")
+    else:
+        print("[ℹ] El usuario eligió no hacer click en 'Yes, of course!'")
+    # Seleccionar el elemento "Total"
+    total = driver.find_element(By.CLASS_NAME, "pay")
+
+    # Hover con ActionChains
+    actions = ActionChains(driver)
+    actions.move_to_element(total).perform()
+
+    capturar(driver, carpeta, "4_hover_total")
+   # Hacer click en "View Cart"
+    cart_link = driver.find_element(By.CSS_SELECTOR, "a[href='/cart']")
+    cart_link.click()
+    capturar(driver, carpeta, "5_view_cart")    
 PRUEBAS = {
-    1: prueba_1, 2: prueba_2, 3: prueba_3, 4: prueba_4
+    1: prueba_1, 2: prueba_2, 3: prueba_3, 4: prueba_4, 5: prueba_5
 }
 
 # ==== TKINTER ====
 root = tk.Tk(); root.withdraw()
-caso = simpledialog.askinteger("Caso de prueba", "Ingrese el número de caso (1-4):")
+caso = simpledialog.askinteger("Caso de prueba", "Ingrese el número de caso (1-5):")
 
 if caso in PRUEBAS:
     carpeta = crear_carpeta(caso)
