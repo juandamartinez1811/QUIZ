@@ -329,9 +329,9 @@ def prueba_4(carpeta):
 
     try:
         name_field.clear()
-        name_field.send_keys("Luisa Rojas")
+        name_field.send_keys("pablito guzman")
         email_field.clear()
-        email_field.send_keys("luisa@test.com")
+        email_field.send_keys("pablito@test.com")
         capturar(driver, carpeta, "6_datos_ingresados")
     except Exception as e:
         print("[ERROR] Error al escribir datos en prueba_4:", e)
