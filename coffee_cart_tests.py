@@ -428,14 +428,14 @@ def prueba_5(carpeta):
    # Hacer click en "View Cart"
     cart_link = driver.find_element(By.CSS_SELECTOR, "a[href='/cart']")
     cart_link.click()
-    capturar(driver, carpeta, "5_view_cart"
+    capturar(driver, carpeta, "5_view_cart")
 # ==== MAPA DE PRUEBAS ====
-PRUEBAS = {1: prueba_1, 2: prueba_2, 3: prueba_3, 4: prueba_4, 5: prueba_5}}
+PRUEBAS = {1: prueba_1, 2: prueba_2, 3: prueba_3, 4: prueba_4, 5: prueba_5}
 
 
 # ==== TKINTER ====
 root = tk.Tk(); root.withdraw()
-caso = simpledialog.askinteger("Caso de prueba", "Ingrese el número de caso (1-4):")
+caso = simpledialog.askinteger("Caso de prueba", "Ingrese el número de caso (1-5):")
 root.destroy()
 
 if caso in PRUEBAS:
